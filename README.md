@@ -15,7 +15,7 @@ According to a study published in the Yale Law Journal, just slightly more than 
 ## Data 
 
 ###### Data Source
-This project utilized a dataset from Open [NYC Data] (https://data.cityofnewyork.us/City-Government/OATH-Hearings-Division-Case-Status/jz4z-kudi) that tracks civil tickets filed and adjudicated through the City’s independent civil court. The dataset provides information about the decision outcome, fine imposed, infraction charged, violation location, respondent's address, and many other relevant information. 
+This project utilized a dataset from Open [NYC Data](https://data.cityofnewyork.us/City-Government/OATH-Hearings-Division-Case-Status/jz4z-kudi) that tracks civil tickets filed and adjudicated through the City’s independent civil court. The dataset provides information about the decision outcome, fine imposed, infraction charged, violation location, respondent's address, and many other relevant information. 
 
 ###### Data Shape
 The entire raw dataset contained 17.8 millions rows and 78 columns. The dataset grows by the day as it is updated on a daily basis. Each row represents a ticket while each column specifies a feature, such as the ones mentioned above. 
