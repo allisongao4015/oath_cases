@@ -63,27 +63,25 @@ On the other hand, predicting that a ticket will not result in fine when in actu
 
 Currently, the model that produces the highest precision score is XGBoost. It results in a 66% accuracy score and 60% in precision. As seen on the confusion matrix below (which is normalized to show precision), it is better at predicting the negative class relative to the positive . 
 
+![image-1](https://github.com/allisongao4015/oath_cases/blob/main/Images/10:20:2021%20MVP%20Submission%20XGBoost%20Result.png) <br />
 
 
+Important features were identifed from the same model. 
 
-Important features were identifed from Decision Tree and Random Forest by the value of the coefficient to highlight relevant features. 
+![image-1](https://github.com/allisongao4015/oath_cases/blob/main/Images/10:20:2021%20MVP%20Submission%20XGBoost%20Result2.png) <br />
 
-The following features appeared in both models: 
+These following features are highlighted: 
 
-1. Sanitation Police
-2. Administrative Code 10
-3. Median household income 
+1. Class 10 of the New York City Administrative Code
+2. Staten Island as the location where the ticket was issued
+3. Police Department as the issuing agency
+4. Class 151 of the Health Code
+5. Class 56 of the RCNY rule 
 
 
 ## Conclusion
 
-Results from this project’s analysis suggested the following recommendations:
-
-1.  
-
-2. 
-
-3. 
+[this is left empty for now]
     
 
 ## Next Steps
@@ -109,9 +107,9 @@ Allison Gao: allison.gao@nyu.edu
 
 
 ├── Images    <-- visualizations generated from working notebooks and external images
-├── 1st Notebook
-├── 2nd Notebook
-├── 3rd Notebook
+├── 1st Notebook.  <-- working through the raw data
+├── 2nd Notebook.  <-- EDA and feature engineering
+├── 3rd Notebook.   <-- modeling 
 ├── Final Notebook.ipynb    <-- Jupyter Notebook containing codes detailing project's analysis 
 ├── Non-technical Presentation.pdf   <-- non-technical presentation slides
 └── README.md
