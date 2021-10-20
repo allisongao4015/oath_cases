@@ -31,7 +31,7 @@ The cleaned dataset used for modeling contained 213243 rows and 271 columns (the
 
 For the predcitive class, approximately 60% of the tickets from the cleaned dataset resulted in no fee collection while the rest did. 
 
-(https://github.com/allisongao4015/oath_cases/blob/main/Images/target%20distribution.png)
+![image-1](https://github.com/allisongao4015/oath_cases/blob/main/Images/target%20distribution.png) <br />
 
 
 ## Data Analysis 
