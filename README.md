@@ -47,7 +47,7 @@ After data cleaning, the final dataset used for modeling contained 213,243 rows 
 2. Drop all rows that did not contain information on the ticket outcome. This is important since the ticket outcome is the predictive class. 
 3. Additional columns were created as an effort to make the dataset more meaningful. This included appending neighborhood-level income data from the census.
 
-Predictive Class 
+Predictive Class: 
 60% of the tickets in the dataset ended up in no fine collected while approximately 40% did end up in fine collected. 
 
 ![image-1](https://github.com/allisongao4015/oath_cases/blob/main/Images/1predictiveclass.jpeg) <br />
