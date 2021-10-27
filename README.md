@@ -1,7 +1,7 @@
 ![Header Image](https://github.com/allisongao4015/oath_cases/blob/main/Images/judge-gavel-and-law-books.jpg)
 Source: [Burst](https://burst.shopify.com/photos/judge-gavel-and-law-books?q=court)
 
-# Predicting Fee Collection Outcome for Low-Level Civil Tickets Issued in New York City
+# Predicting Fine Collection Outcomes for Low-Level Civil Tickets Issued in New York City
 
 ## October 2021
 
