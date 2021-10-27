@@ -15,83 +15,103 @@ The purpose of the analysis is to create a classification model that predicts wh
                1) ticket is written off before a hearing takes place
                2) case dismissed
                3) guilty
-               4) default, commonly known as no action by the respondent, which results in forwarding the case to the Department of Finance for fine collection. 
-               
-As mentioned, the third and fourth outcome lead to fine collection while the first and the second outcome do not. 
+               4) defaulted, commonly known as no action by the respondent. 
 
-According to a study published in the Yale Law Journal, just slightly more than half of the tickets adjudicated at OATH result in fine collection. This raises serious policy implications. 
+Scenarios 3 and 4 result in fine collection while the first and the second outcome do not.
 
-1.  If the City of New York includes fine collection in its budget calculation, an incorrect estimate can lead to problematic budget analysis. Therefore, this project seeks to produce a model that accurately predicts a ticket's outcome with respect to fine collection. 
 
-2. If fine collection serves to deter violations, such a significant number of tickets ending up in no fine collection raises serious questions about the purpose of issuing these tickets. As such, this project also aims to highlight features relevant to target outcome. 
+According to a study published in the [Yale Law Journal](https://www.yalelawjournal.org/forum/who-pays) , just slightly more than half of the tickets adjudicated by the City’s civil court resulted in fine collection. This raises a series of policy implications. 
 
-Findings from this project are applicable to a range of stakeholders. This includes the City of New York, elected officials as well as consulting firms seeking to enhance the City's fine collection policy. 
+1. If fine collection serves to deter bad behavior, but a significant number of tickets do not result in fine collection, then it raises questions on its intentions. As such, this project also aims to highlight features relevant to the predictive class. 
+
+2.  Fines and fees are an income stream for the City of New York. An incorrect estimate can lead to problematic budget analysis. Therefore, this project seeks to produce a model that accurately predicts if a ticket will end up in fine collection. 
+
+Findings from this project are applicable to a range of stakeholders. This includes the City of New York, elected officials, as well as public affairs firms seeking to evaluate the City's fine collection policy. 
 
 
 ## Data 
 
 ###### Data Source
-This project utilized a dataset from [Open NYC Data](https://data.cityofnewyork.us/City-Government/OATH-Hearings-Division-Case-Status/jz4z-kudi) that tracks civil tickets filed and adjudicated through the City’s independent civil court, known as the Office of Administrative Trials and Hearings (OATH). 
 
-The dataset provides information on, among many other things, decision outcome, fine imposed, infraction charged, violation location, and respondent's address.
+Data for this project came from the New York City Office of Administrative Trials and Hearings (OATH) Case Status Tracker, which is accessible via  [Open NYC Data](https://data.cityofnewyork.us/City-Government/OATH-Hearings-Division-Case-Status/jz4z-kudi) . OATH adjudicates civil tickets issued by a wide range of public agencies. This project only looked at tickets issued by the Department of Sanitation, which has a sanitation police unit and the New York City Police Department. Both agencies issue low-level civil tickets, sometimes overlapping ones.
+
 
 ###### Data Shape
-The entire raw dataset contained 17.8 millions rows and 78 columns. The dataset grows by the day as it is updated on a daily basis. Each row represents a ticket while each column specifies a feature, such as the ones mentioned above. 
 
-For the purpose of this analysis, only tickets issued by the New York City Police Department and the New York City Department of Sanitation (Police Enforcement Unit) are considered. Both agencies issue low-level quality of life violations. This resulted in 766394 rows and 78 columns for this project.
+Each row of the dataset is a ticket and the columns are the information associated with the ticket. The entire raw dataset from Open NYC Data as of this month (October 2021) contains a record of 17.9 million tickets issued. However, after narrowing down the issuing agencies, the final dataset for analysis contains approximately ~760,000 tickets and 78 columns. For each column, the dataset provides information on, among many other things, decision outcome, fine imposed, infraction charged, violation location, and respondent's address.
 
 ###### Data Preparation
-The cleaned dataset used for modeling contained 213243 rows and 271 columns (the 271 include dummy variables). To arrive at such numbers the following steps were taken:
+After data cleaning, the final dataset used for modeling contained 213,243 rows and 271 columns (the 271 columns include dummy variables). To arrive at such numbers the following steps were taken:
 
 1. Dropped all the columns that only contained null values
-2. Drop all rows that did not contain information on the ticket outcome. This is important since ticket outcome is the predictive class. 
-3. Additional columns were created as an effort to make the dataset more meaningful. This included appending neighborhood level income data zip codes that match up with zip codes written on the ticket.
+2. Drop all rows that did not contain information on the ticket outcome. This is important since the ticket outcome is the predictive class. 
+3. Additional columns were created as an effort to make the dataset more meaningful. This included appending neighborhood-level income data from the census.
 
-For the predctive class, approximately 60% of the tickets from the cleaned dataset resulted in no fee collection while the rest did. 
+Predictive Class: 
+60% of the tickets in the dataset ended up in no fine collected while approximately 40% did end up in fine collected. 
 
-![image-1](https://github.com/allisongao4015/oath_cases/blob/main/Images/target%20distribution.png) <br />
+![image-1](https://github.com/allisongao4015/oath_cases/blob/main/Images/1predictiveclass.jpeg) <br />
 
 
 ## Data Analysis 
 
-This project used a dummy classifier (baseline model), logistic regression, decision tree, random forest, and XGBoost for machine learning modeling. Data was split into training and testing/holdout sets with cross validation done on the training set for model evaluation. Two metrics are used to evaluate model performance, and they are accuracy and precision. Increasing the precision score is the focal point of the model iteration process. 
+This project used a Dummy Classifier (baseline model), Logistic Regression, Decision Tree, Random Forest, and XGBoost for machine learning modeling. Grid search was used on all models, with the exception of the Dummy Classifier, to find the best parameters. Data was split into training and testing/holdout sets with cross validation done on the training set for model evaluation. 
 
-The goal is to minimize predicting tickets that will result in fine collection when in actuality they do not. This will result in the City overestimating fine collection for budget analysis purposes. 
+Two metrics were used to evaluate model performance, and they are accuracy and precision. Increasing the precision score was the focal point of the model iteration process. 
 
-On the other hand, predicting that a ticket will not result in fine when in actuality it will is not as serious of an issue for the City. In the end, that's more money that the government did not account for. 
+Keeping the stakeholders in mind, fine collected is the positive outcome to focus on in order to accurately measure income coming from these tickets. In other words, by focusing on increasing the true positives, the model is trying to minimize false positives--predicting tickets that will result in fine collection when in actuality they do not. This will result in the City overestimating fine collection for budget analysis purposes. 
+
+On the other hand, predicting that a ticket will not result in fine when in actuality it will (a false negative) is not as serious of an issue for the City. In the end, that's delivering more than what the government projects. 
+
+Model Performance on Training Set. Random Forest and XGBoost are the two best performing models on the training set. 
+
+![image-1](https://github.com/allisongao4015/oath_cases/blob/main/Images/2Model%20Performanceon%20TrainingSet.jpeg) <br />
 
 ## Results 
 
-Currently, the model that produces the highest precision score is XGBoost. It results in a 66% accuracy score and 60% in precision. As seen on the confusion matrix below (which is normalized to show precision), it is better at predicting the negative class relative to the positive . 
+Since Random Forest and XGBoost produced similar scores, both models were tested on the holdout set. XGBoost produced a 64% accuracy score and 54% in precision. On the other hand, Random Forest produced a 70% accuracy score and 66% in precision. Therefore, Random Forest is the best performing model. 
 
-![image-1](https://github.com/allisongao4015/oath_cases/blob/main/Images/10:20:2021%20MVP%20Submission%20XGBoost%20Result.png) <br />
+As shown on the confusion matrix, when predicting the fine collected group, Random Forest can get it right 66% of the time. 
 
-
-Important features were identified from the same model. 
-
-![image-1](https://github.com/allisongao4015/oath_cases/blob/main/Images/10:20:2021%20MVP%20Submission%20XGBoost%20Result2.png) <br />
-
-These following features are highlighted: 
-
-1. Class 10 of the New York City Administrative Code
-2. Staten Island as the location where the ticket was issued
-3. Police Department as the issuing agency
-4. Class 151 of the Health Code
-5. Class 56 of the RCNY rule 
+![image-1](https://github.com/allisongao4015/oath_cases/blob/main/Images/3confusionmatrixbestmodel.jpeg) <br />
 
 
-## Conclusion
+The following features are highlighted to give insight into the analysis. 
 
-[this is left empty for now]
+For tickets issued in Queens, the share of tickets between the two outcome groups is pretty even. However, when we look at Staten Island, tickets with no fee collected significantly outweigh the fee collected. 
+
+
+
+
+![image-1](https://github.com/allisongao4015/oath_cases/blob/main/Images/4violationlocation.jpeg) <br />
+
+Of all the issuing parties on this graph, the disparity between the two outcomes for NYPD issued tickets is the greatest. We see that a lot of tickets issued by the NYPD do not end up in fines collected. 
+
+
+![image-1](https://github.com/allisongao4015/oath_cases/blob/main/Images/5issuingagency.jpeg) <br />
+
+AC stands for the Administrative Code of New York. Title 10 of the Administrative Code governs quality of life regulations such as noise, graffiti, and public drink. The ratio of fine collected to no fine collected is incredibly high. For someone who receives a ticket with a Title 10 violation, the chances of paying a fine is more likely than not. 
+
+On the other hand, Title 20 of the Administrative, which governs regulation around general vendors, no fine collected significantly outweighs fine collected. 
+
+![image-1](https://github.com/allisongao4015/oath_cases/blob/main/Images/6TicketOutcomeByViolation%20T.jpeg) <br />
+
+
+## Takeaways
+
+From a policy perspective, NYPD should consider reevaluating its ticket issuance approach. If fine collection is a means to deter bad behavior, but these tickets do not end up in fine collection, it raises questions about the purpose of issuing these tickets. 
+
+From an efficiency standpoint, Staten Island is an interesting case for the city to explore. Efforts are invested in issuing these tickets and yet, many of them do not end up in fine collection. Valuable information can be drawn from a case study regarding Staten Island. 
+
     
 
-## Next Steps
+## Project Next Steps
 
-1. Expand the dataset to include other agencies such as Department of Buildings 
+Goal: to increase the precision score. 
 
-2. Feature engineering the infraction charged column to be theme-based violation such as "open container", "littering", "unlicensed vendor", etc. 
+1. Expand the dataset to include other agencies (such as the Department of Buildings)
 
-3. Obtain additional census data to expand neighborhood level information 
+2. Obtain additional census data to expand on neighborhood-level information 
 
 
 ## Additional Information
@@ -100,7 +120,7 @@ See the full analysis in the [Jupyter Notebook](https://github.com/allisongao401
 
 For additional info, contact
 
-Allison Gao: allison.gao@nyu.edu
+Allison Gao: allison.gao92@gmail.com
 
 ## Project Structure 
 
@@ -108,9 +128,9 @@ Allison Gao: allison.gao@nyu.edu
 
 
 ├── Images    <-- visualizations generated from working notebooks and external images
-├── 1st Notebook.  <-- working through the raw data
+├── 1st Notebook.  <-- working notebook to clean the raw data
 ├── 2nd Notebook.  <-- EDA and feature engineering
 ├── 3rd Notebook.   <-- modeling 
-├── Final Notebook.ipynb    <-- Jupyter Notebook containing codes detailing project's analysis 
+├── Final Notebook.ipynb    <-- Jupyter Notebook contains all the notebooks combined; detailing project's analysis 
 ├── Non-technical Presentation.pdf   <-- non-technical presentation slides
 └── README.md
