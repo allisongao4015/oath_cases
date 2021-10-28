@@ -15,7 +15,7 @@ The purpose of the analysis is to create a classification model that predicts wh
                1) ticket is written off before a hearing takes place
                2) case dismissed
                3) guilty
-               4) defaulted, commonly known as no action by the respondent. 
+               4) defaulted, commonly known as no action by the respondent
 
 Scenarios 3 and 4 result in fine collection while the first and the second outcome do not.
 
