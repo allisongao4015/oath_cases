@@ -8,6 +8,9 @@ Source: [Burst](https://burst.shopify.com/photos/judge-gavel-and-law-books?q=cou
 Allison Gao
 
 ## General Overview and Issue Understanding
+
+In 2016, the Criminal Justice Reform Act was signed into law to shift many low-level violations from criminal to civil court. Such tickets, which were usually heard at criminal courts, are now adjudicated through the City’s administrative law court, the NYC Office of Trials and Hearings (OATH).
+
 This analysis used data on low-level civil tickets issued by public agencies in New York City to predict fine collection outcomes. This is a binary problem where a ticket either did or did not result in a fine collected.
 
 The purpose of the analysis is to create a classification model that predicts whether or not a ticket will result in fine collection. When a ticket is issued to an individual or a commercial entity, the outcome falls into one of the four categories: 
