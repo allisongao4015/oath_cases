@@ -29,7 +29,7 @@ According to a study published in the [Yale Law Journal](https://www.yalelawjour
 
 2.  Fines and fees are an income stream for the City of New York. An incorrect estimate can lead to problematic budget analysis. Therefore, this project seeks to produce a model that accurately predicts if a ticket will end up in fine collection. 
 
-Findings from this project are applicable to a range of stakeholders. This includes the City of New York, elected officials, as well as public affairs firms seeking to evaluate the City's fine collection policy. 
+Findings from this project are applicable to a range of stakeholders. This includes the City of New York, elected officials, as well as advocacy groups seeking to evaluate the City's fine collection policy. 
 
 
 ## Data 
